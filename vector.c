@@ -12,6 +12,15 @@ struct vector_t
     void* data;
 };
 
+void init_vector_t(vector vec, uint64_t size_of_type)
+{
+    if (vec != NULL)
+    {
+        free(vec->data);
+        free(vec);
+    }
+    vec = create_vector_t(size_of_type);
+}
 vector create_vector_t(uint64_t size_of_type)
 {
     vector new_vector = (vector)malloc(sizeof(struct vector_t));
@@ -42,36 +51,49 @@ void restart_vector_t(vector vec)
 }
 void reserve_vector_t(vector vec, uint64_t capacity)
 {
-    void* new_data = malloc(capacity * vec->size_of_type);
-    memcpy(new_data, vec->data, vec->size * vec->size_of_type);
-    free(vec->data);
-    vec->data = new_data;
-    vec->capacity = capacity;
-}
-void push_vector_t(vector vec, void* data)
-{
-    if (vec->size == vec->capacity) 
+    if (vec != NULL)
     {
-        void* new_data = malloc((vec->capacity * 2) * vec->size_of_type);
+        void* new_data = malloc(capacity * vec->size_of_type);
         memcpy(new_data, vec->data, vec->size * vec->size_of_type);
         free(vec->data);
         vec->data = new_data;
-        vec->capacity *= 2;
+        vec->capacity = capacity;
     }
-    memcpy((void*)((uint8_t*)vec->data + vec->size * vec->size_of_type), data, vec->size_of_type);
-    vec->size++;
+}
+void push_vector_t(vector vec, void* data)
+{
+    if (vec != NULL)
+    {
+        if (vec->size == vec->capacity) 
+        {
+            void* new_data = malloc((vec->capacity * 2) * vec->size_of_type);
+            memcpy(new_data, vec->data, vec->size * vec->size_of_type);
+            free(vec->data);
+            vec->data = new_data;
+            vec->capacity *= 2;
+        }
+        memcpy((void*)((uint8_t*)vec->data + vec->size * vec->size_of_type), data, vec->size_of_type);
+        vec->size++;
+    }
 }
 void pop_vector_t(vector vec)
 {
-    vec->size--;
+    if (vec != NULL)
+    {
+        vec->size--;
+    }
 }
 void* element_vector_t(vector vec, uint64_t index)
 {
-    return (void*)((uint8_t*)vec->data + index * vec->size_of_type);
+    if (vec != NULL)
+    {
+        return (void*)((uint8_t*)vec->data + index * vec->size_of_type);
+    }
+    return NULL;
 }
 void insert_vector_t(vector vec, void* data, uint64_t index)
 {
-    if (index <= vec->size)
+    if (vec != NULL && index <= vec->size)
     {
         if (vec->size == vec->capacity) 
         {
@@ -94,7 +116,7 @@ void insert_vector_t(vector vec, void* data, uint64_t index)
 }
 void erase_vector_t(vector vec, uint64_t index)
 {
-    if (index < vec->size)
+    if (vec != NULL && index < vec->size)
     {
         uint8_t* current_data = (uint8_t*)vec->data + index * vec->size_of_type;
         memcpy((void*)(current_data), (void*)(current_data + vec->size_of_type), (vec->size - index) * vec->size_of_type);
@@ -103,19 +125,30 @@ void erase_vector_t(vector vec, uint64_t index)
 }
 void clear_vector_t(vector vec)
 {
-    vec->size = 0;
+    if (vec != NULL)
+    {
+        vec->size = 0;
+    }
 }
 uint64_t size_vector_t(vector vec)
 {
-    return vec->size;
+    if (vec != NULL)
+    {
+        return vec->size;
+    }
+    return 0;
 }
 uint64_t capacity_vector_t(vector vec)
 {
-    return vec->capacity;
+    if (vec != NULL)
+    {
+        return vec->capacity;
+    }
+    return 0;
 }
 void print_vector_t(vector vec)
 {
-    if (vec->size != 0)
+    if (vec != NULL && vec->size != 0)
     {
         printf("Data:\n");
         int i = 0;
