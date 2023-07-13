@@ -36,7 +36,7 @@ int main(void)
     erase_vector(v, 1);
     print_vector(v);
 
-    printf("\nSize: %llu", size_vector(v));
+    printf("\nSize: %llu\nCapacity: %llu", size_vector(v), capacity_vector(v));
 
     free_vector(v);
 
