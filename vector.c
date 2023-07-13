@@ -43,21 +43,17 @@ void restart_vector_t(vector vec)
 {
     if (vec != NULL && vec->data != NULL)
     {
-        free(vec->data);
         vec->size = 0;
         vec->capacity = 1;
-        vec->data = malloc(vec->size_of_type);
+        vec->data = realloc(vec->data, vec->size_of_type);
     }
 }
 void reserve_vector_t(vector vec, unsigned int capacity)
 {
     if (vec != NULL)
     {
-        void* new_data = malloc(capacity * vec->size_of_type);
-        memcpy(new_data, vec->data, vec->size * vec->size_of_type);
-        free(vec->data);
-        vec->data = new_data;
         vec->capacity = capacity;
+        vec->data = realloc(vec->data, capacity * vec->size_of_type);
     }
 }
 void push_vector_t(vector vec, void* data)
@@ -66,11 +62,8 @@ void push_vector_t(vector vec, void* data)
     {
         if (vec->size == vec->capacity) 
         {
-            void* new_data = malloc((vec->capacity * 2) * vec->size_of_type);
-            memcpy(new_data, vec->data, vec->size * vec->size_of_type);
-            free(vec->data);
-            vec->data = new_data;
             vec->capacity *= 2;
+            vec->data = realloc(vec->data, vec->capacity * vec->size_of_type);
         }
         memcpy((void*)((unsigned char*)vec->data + vec->size * vec->size_of_type), data, vec->size_of_type);
         vec->size++;
@@ -98,19 +91,11 @@ void insert_vector_t(vector vec, void* data, unsigned int index)
         if (vec->size == vec->capacity) 
         {
             vec->capacity *= 2;
-            void* new_data = malloc(vec->capacity * vec->size_of_type);
-            memcpy(new_data, vec->data, index * vec->size_of_type);
-            memcpy((void*)((unsigned char*)new_data + index * vec->size_of_type), data, vec->size_of_type);
-            memcpy((void*)((unsigned char*)new_data + (index + 1) * vec->size_of_type), (void*)((unsigned char*)vec->data + index * vec->size_of_type), (vec->size - index) * vec->size_of_type);
-            free(vec->data);
-            vec->data = new_data;
+            vec->data = realloc(vec->data, vec->capacity * vec->size_of_type);
         }
-        else
-        {
-            unsigned char* current_data = (unsigned char*)vec->data + index * vec->size_of_type;
-            memmove((void*)(current_data + vec->size_of_type), (void*)(current_data), (vec->size - index) * vec->size_of_type);
-            memcpy((void*)(current_data), data, vec->size_of_type);
-        }
+        unsigned char* current_data = (unsigned char*)vec->data + index * vec->size_of_type;
+        memmove((void*)(current_data + vec->size_of_type), (void*)(current_data), (vec->size - index) * vec->size_of_type);
+        memcpy((void*)(current_data), data, vec->size_of_type);
         vec->size++;
     }
 }
