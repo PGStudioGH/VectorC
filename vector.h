@@ -24,8 +24,10 @@ void print_vector_t(vector vec);
 #define create_vector(type)                         create_vector_t(sizeof(type))
 #define free_vector(vector)                         free_vector_t(vector)
 #define restart_vector(vector)                      restart_vector_t(vector)
-#define push_vector(vector, type, data)             { type temp = data; push_vector_t(vector, &temp); }
-#define pop_vector(vector)                          pop_vector_t(vector)
+#define push_front_vector(vector, type, data)       { type temp = data; insert_vector_t(vector, &temp, 0); }
+#define push_back_vector(vector, type, data)        { type temp = data; push_vector_t(vector, &temp); }
+#define pop_front_vector(vector)                    erase_vector_t(vector, 0)
+#define pop_back_vector(vector)                     pop_vector_t(vector)
 #define element_vector(vector, type, index)         *(type*)element_vector_t(vector, index)
 #define insert_vector(vector, type, data, index)    { type temp = data; insert_vector_t(vector, &temp, index); }
 #define erase_vector(vector, index)                 erase_vector_t(vector, index)
