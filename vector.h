@@ -1,26 +1,23 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-//Include
-#include <stdint.h>
-
 //Typedef
 typedef struct vector_t*                            vector;
 
 //Functions
-void init_vector_t(vector vec, uint64_t size_of_type);
-vector create_vector_t(uint64_t size_of_type);
+void init_vector_t(vector vec, unsigned int size_of_type);
+vector create_vector_t(unsigned int size_of_type);
 void free_vector_t(vector vec);
 void restart_vector_t(vector vec);
-void reserve_vector_t(vector vec, uint64_t capacity);
+void reserve_vector_t(vector vec, unsigned int capacity);
 void push_vector_t(vector vec, void* data);
 void pop_vector_t(vector vec);
-void* element_vector_t(vector vec, uint64_t index);
-void insert_vector_t(vector vec, void* data, uint64_t index);
-void erase_vector_t(vector vec, uint64_t index);
+void* element_vector_t(vector vec, unsigned int index);
+void insert_vector_t(vector vec, void* data, unsigned int index);
+void erase_vector_t(vector vec, unsigned int index);
 void clear_vector_t(vector vec);
-uint64_t size_vector_t(vector vec);
-uint64_t capacity_vector_t(vector vec);
+unsigned int size_vector_t(vector vec);
+unsigned int capacity_vector_t(vector vec);
 void print_vector_t(vector vec);
 
 //Macros
