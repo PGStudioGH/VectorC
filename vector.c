@@ -40,12 +40,20 @@ void restart_vector_t(vector vec)
         vec->data = malloc(vec->size_of_type);
     }
 }
+void reserve_vector_t(vector vec, uint64_t capacity)
+{
+    void* new_data = malloc(capacity * vec->size_of_type);
+    memcpy(new_data, vec->data, vec->size * vec->size_of_type);
+    free(vec->data);
+    vec->data = new_data;
+    vec->capacity = capacity;
+}
 void push_vector_t(vector vec, void* data)
 {
     if (vec->size == vec->capacity) 
     {
         void* new_data = malloc((vec->capacity * 2) * vec->size_of_type);
-        memcpy(new_data, vec->data, vec->capacity * vec->size_of_type);
+        memcpy(new_data, vec->data, vec->size * vec->size_of_type);
         free(vec->data);
         vec->data = new_data;
         vec->capacity *= 2;
@@ -100,6 +108,10 @@ void clear_vector_t(vector vec)
 uint64_t size_vector_t(vector vec)
 {
     return vec->size;
+}
+uint64_t capacity_vector_t(vector vec)
+{
+    return vec->capacity;
 }
 void print_vector_t(vector vec)
 {
