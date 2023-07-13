@@ -9,13 +9,13 @@ int main(void)
     //Second way to create
     init_vector(v, int);
 
-    push_vector(v, int, 864);
-    push_vector(v, int, 25);
-    push_vector(v, int, 93);
-    push_vector(v, int, 82);
-    push_vector(v, int, 6);
-    push_vector(v, int, 9);
-    push_vector(v, int, 0xFF88FF00);
+    push_back_vector(v, int, 864);
+    push_back_vector(v, int, 25);
+    push_back_vector(v, int, 93);
+    push_back_vector(v, int, 82);
+    push_back_vector(v, int, 6);
+    push_back_vector(v, int, 9);
+    push_back_vector(v, int, 0xFF88FF00);
     printf("Show all elements from vector:\n");
     print_vector(v);
     
@@ -39,7 +39,25 @@ int main(void)
     erase_vector(v, 1);
     print_vector(v);
 
-    printf("\nSize: %llu\nCapacity: %llu", size_vector(v), capacity_vector(v));
+    printf("\nUse pop_front:\n");
+    pop_front_vector(v);
+    print_vector(v);
+
+    printf("\nUse pop_back:\n");
+    pop_back_vector(v);
+    print_vector(v);
+
+    printf("\nClear vector:\n");
+    clear_vector(v);
+    print_vector(v);
+
+    printf("\nAdd 10 element, then use push_front:\n");
+    for (int i = 0; i < 10; i++)
+        push_back_vector(v, int, i);
+    push_front_vector(v, int, 0x12345678);
+    print_vector(v);
+
+    printf("\nSize: %u\nCapacity: %u", size_vector(v), capacity_vector(v));
 
     free_vector(v);
 
