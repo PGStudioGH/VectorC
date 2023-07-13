@@ -4,7 +4,10 @@
 
 int main(void)
 {
+    //First way to create
     vector v = create_vector(int);
+    //Second way to create
+    init_vector(v, int);
 
     push_vector(v, int, 864);
     push_vector(v, int, 25);
