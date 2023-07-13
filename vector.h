@@ -8,6 +8,7 @@
 typedef struct vector_t*                            vector;
 
 //Functions
+void init_vector_t(vector vec, uint64_t size_of_type);
 vector create_vector_t(uint64_t size_of_type);
 void free_vector_t(vector vec);
 void restart_vector_t(vector vec);
@@ -23,6 +24,7 @@ uint64_t capacity_vector_t(vector vec);
 void print_vector_t(vector vec);
 
 //Macros
+#define init_vector(vector, type)                   init_vector_t(vector, sizeof(type));
 #define create_vector(type)                         create_vector_t(sizeof(type))
 #define free_vector(vector)                         free_vector_t(vector)
 #define restart_vector(vector)                      restart_vector_t(vector)
