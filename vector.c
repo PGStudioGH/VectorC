@@ -12,14 +12,14 @@ struct vector_t
     void* data;
 };
 
-void init_vector_t(vector vec, unsigned int size_of_type)
+void init_vector_t(vector* vec, unsigned int size_of_type)
 {
-    if (vec != NULL)
+    if ((*vec) != NULL)
     {
-        if (vec->data != NULL) free(vec->data);
-        free(vec);
+        if ((*vec)->data != NULL) free((*vec)->data);
+        free((*vec));
     }
-    vec = create_vector_t(size_of_type);
+    (*vec) = create_vector_t(size_of_type);
 }
 vector create_vector_t(unsigned int size_of_type)
 {
@@ -33,13 +33,13 @@ vector create_vector_t(unsigned int size_of_type)
     }
     return new_vector;
 }
-void free_vector_t(vector vec)
+void free_vector_t(vector* vec)
 {
-    if (vec != NULL)
+    if ((*vec) != NULL)
     {
-        if (vec->data != NULL) free(vec->data);
-        free(vec);
-        vec = NULL;
+        if ((*vec)->data != NULL) free((*vec)->data);
+        free((*vec));
+        (*vec) = NULL;
     }
 }
 void restart_vector_t(vector vec)
