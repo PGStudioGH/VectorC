@@ -79,8 +79,8 @@ void push_vector_t(vector vec, void* data)
             void* temp = realloc(vec->data, vec->capacity * vec->size_of_type);
             if (temp != NULL) vec->data = temp;
         }
-        void* current_data = (void*)((unsigned char*)vec->data + vec->size * vec->size_of_type);
-        memcpy(current_data, data, vec->size_of_type);
+        unsigned char* current_data = (unsigned char*)vec->data + vec->size * vec->size_of_type;
+        memcpy((void*)current_data, data, vec->size_of_type);
         vec->size++;
     }
 }
