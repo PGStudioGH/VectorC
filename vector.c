@@ -16,7 +16,7 @@ void init_vector_t(vector vec, unsigned int size_of_type)
 {
     if (vec != NULL)
     {
-        free(vec->data);
+        if (vec->data != NULL) free(vec->data);
         free(vec);
     }
     vec = create_vector_t(size_of_type);
@@ -24,28 +24,36 @@ void init_vector_t(vector vec, unsigned int size_of_type)
 vector create_vector_t(unsigned int size_of_type)
 {
     vector new_vector = (vector)malloc(sizeof(struct vector_t));
-    new_vector->size = 0;
-    new_vector->capacity = 1;
-    new_vector->size_of_type = size_of_type;
-    new_vector->data = malloc(size_of_type);
+    if (new_vector != NULL)
+    {
+        new_vector->size = 0;
+        new_vector->capacity = 1;
+        new_vector->size_of_type = size_of_type;
+        new_vector->data = malloc(size_of_type);
+    }
     return new_vector;
 }
 void free_vector_t(vector vec)
 {
-    if (vec != NULL && vec->data != NULL)
+    if (vec != NULL)
     {
-        free(vec->data);
+        if (vec->data != NULL) free(vec->data);
         free(vec);
         vec = NULL;
     }
 }
 void restart_vector_t(vector vec)
 {
-    if (vec != NULL && vec->data != NULL)
+    if (vec != NULL)
     {
         vec->size = 0;
         vec->capacity = 1;
-        vec->data = realloc(vec->data, vec->size_of_type);
+        if (vec->data != NULL)
+        {
+            void* temp = realloc(vec->data, vec->size_of_type);
+            if (temp != NULL) vec->data = temp;
+        }
+        else vec->data = malloc(vec->size_of_type);
     }
 }
 void reserve_vector_t(vector vec, unsigned int capacity)
@@ -53,71 +61,86 @@ void reserve_vector_t(vector vec, unsigned int capacity)
     if (vec != NULL)
     {
         vec->capacity = capacity;
-        vec->data = realloc(vec->data, capacity * vec->size_of_type);
+        if (vec->data != NULL)
+        {
+            void* temp = realloc(vec->data, capacity * vec->size_of_type);
+            if (temp != NULL) vec->data = temp;
+        }
+        else vec->data = malloc(capacity * vec->size_of_type);
     }
 }
 void push_vector_t(vector vec, void* data)
 {
-    if (vec != NULL)
+    if (vec != NULL && vec->data != NULL)
     {
-        if (vec->size == vec->capacity) 
+        if (vec->size == vec->capacity)
         {
             vec->capacity *= 2;
-            vec->data = realloc(vec->data, vec->capacity * vec->size_of_type);
+            void* temp = realloc(vec->data, vec->capacity * vec->size_of_type);
+            if (temp != NULL) vec->data = temp;
         }
-        memcpy((void*)((unsigned char*)vec->data + vec->size * vec->size_of_type), data, vec->size_of_type);
+        void* current_data = (void*)((unsigned char*)vec->data + vec->size * vec->size_of_type);
+        memcpy(current_data, data, vec->size_of_type);
         vec->size++;
     }
 }
 void pop_vector_t(vector vec)
 {
-    if (vec != NULL)
+    if (vec != NULL && vec->data != NULL)
     {
         vec->size--;
     }
 }
 void* element_vector_t(vector vec, unsigned int index)
 {
-    if (vec != NULL)
+    if (vec != NULL && vec->data != NULL)
     {
-        return (void*)((unsigned char*)vec->data + index * vec->size_of_type);
+        void* element = (void*)((unsigned char*)vec->data + index * vec->size_of_type);
+        return element;
     }
     return NULL;
 }
 void insert_vector_t(vector vec, void* data, unsigned int index)
 {
-    if (vec != NULL && index <= vec->size)
+    if (vec != NULL && vec->data != NULL)
     {
-        if (vec->size == vec->capacity) 
+        if (index <= vec->size)
         {
-            vec->capacity *= 2;
-            vec->data = realloc(vec->data, vec->capacity * vec->size_of_type);
+            if (vec->size == vec->capacity)
+            {
+                vec->capacity *= 2;
+                void* temp = realloc(vec->data, vec->capacity * vec->size_of_type);
+                if (temp != NULL) vec->data = temp;
+            }
+            unsigned char* current_data = (unsigned char*)vec->data + index * vec->size_of_type;
+            memmove((void*)(current_data + vec->size_of_type), (void*)(current_data), (vec->size - index) * vec->size_of_type);
+            memcpy((void*)(current_data), data, vec->size_of_type);
+            vec->size++;
         }
-        unsigned char* current_data = (unsigned char*)vec->data + index * vec->size_of_type;
-        memmove((void*)(current_data + vec->size_of_type), (void*)(current_data), (vec->size - index) * vec->size_of_type);
-        memcpy((void*)(current_data), data, vec->size_of_type);
-        vec->size++;
     }
 }
 void erase_vector_t(vector vec, unsigned int index)
 {
-    if (vec != NULL && index < vec->size)
+    if (vec != NULL && vec->data != NULL)
     {
-        unsigned char* current_data = (unsigned char*)vec->data + index * vec->size_of_type;
-        memcpy((void*)(current_data), (void*)(current_data + vec->size_of_type), (vec->size - index) * vec->size_of_type);
-        vec->size--;
+        if (index < vec->size)
+        {
+            unsigned char* current_data = (unsigned char*)vec->data + index * vec->size_of_type;
+            memcpy((void*)(current_data), (void*)(current_data + vec->size_of_type), (vec->size - index) * vec->size_of_type);
+            vec->size--;
+        }
     }
 }
 void clear_vector_t(vector vec)
 {
-    if (vec != NULL)
+    if (vec != NULL && vec->data != NULL)
     {
         vec->size = 0;
     }
 }
 unsigned int size_vector_t(vector vec)
 {
-    if (vec != NULL)
+    if (vec != NULL && vec->data != NULL)
     {
         return vec->size;
     }
@@ -125,7 +148,7 @@ unsigned int size_vector_t(vector vec)
 }
 unsigned int capacity_vector_t(vector vec)
 {
-    if (vec != NULL)
+    if (vec != NULL && vec->data != NULL)
     {
         return vec->capacity;
     }
@@ -133,7 +156,7 @@ unsigned int capacity_vector_t(vector vec)
 }
 void print_vector_t(vector vec)
 {
-    if (vec != NULL && vec->size != 0)
+    if (vec != NULL && vec->data != NULL && vec->size != 0)
     {
         printf("Data:\n");
         int i = 0;
