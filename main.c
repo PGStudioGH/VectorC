@@ -2,7 +2,7 @@
 
 #include "vector.h"
 
-int hard_way()
+void hard_way()
 {
     printf("\nHard way without macros:\n");
     //First way to create
@@ -77,7 +77,7 @@ int hard_way()
     free_vector_t(&v);
 }
 
-int easy_way()
+void easy_way()
 {
     printf("\nEasy way with macros:\n");
     //First way to create
