@@ -95,8 +95,8 @@ void* element_vector_t(vector vec, unsigned int index)
 {
     if (vec != NULL && vec->data != NULL)
     {
-        void* element = (void*)((unsigned char*)vec->data + index * vec->size_of_type);
-        return element;
+        unsigned char* element = (unsigned char*)vec->data + index * vec->size_of_type;
+        return (void*)element;
     }
     return NULL;
 }
