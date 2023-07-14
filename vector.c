@@ -32,12 +32,9 @@ vector create_vector_t(unsigned int size_of_type)
 }
 void free_vector_t(vector* vec)
 {
-    if ((*vec) != NULL)
-    {
-        free((*vec)->data);
-        free((*vec));
-        (*vec) = NULL;
-    }
+    free((*vec)->data);
+    free((*vec));
+    (*vec) = NULL;
 }
 void restart_vector_t(vector vec)
 {
