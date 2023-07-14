@@ -159,8 +159,8 @@ void print_vector_t(vector vec)
     if (vec != NULL && vec->data != NULL && vec->size != 0)
     {
         printf("Data:\n");
-        int i = 0;
-        int size = vec->size * vec->size_of_type;
+        unsigned int i = 0;
+        unsigned int size = vec->size * vec->size_of_type;
         while (i < size)
         {
             printf("%02hhX ", *((unsigned char*)vec->data + i));
