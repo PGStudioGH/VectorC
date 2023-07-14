@@ -1,8 +1,12 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 //Typedef
-typedef struct vector_t*                            vector;
+typedef struct vector_t* vector;
 
 //Functions
 void init_vector_t(vector vec, unsigned int size_of_type);
@@ -19,6 +23,10 @@ void clear_vector_t(vector vec);
 unsigned int size_vector_t(vector vec);
 unsigned int capacity_vector_t(vector vec);
 void print_vector_t(vector vec);
+
+#ifdef __cplusplus
+}
+#endif
 
 //Macros
 #define init_vector(vector, type)                   init_vector_t(vector, sizeof(type));
