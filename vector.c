@@ -69,6 +69,7 @@ void push_vector_t(vector vec, void* data)
             {
                 vec->capacity = 1;
             }
+            else return;
         }
 
         unsigned char* current_data = (unsigned char*)vec->data + vec->size * vec->size_of_type;
@@ -119,6 +120,7 @@ void insert_vector_t(vector vec, void* data, unsigned int index)
                 {
                     vec->capacity = 1;
                 }
+                else return;
             }
 
             unsigned char* current_data = (unsigned char*)vec->data + index * vec->size_of_type;
