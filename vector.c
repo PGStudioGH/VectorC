@@ -16,7 +16,7 @@ void init_vector_t(vector* vec, unsigned int size_of_type)
 {
     if ((*vec) != NULL)
     {
-        if ((*vec)->data != NULL) free((*vec)->data);
+        free((*vec)->data);
         free((*vec));
     }
     (*vec) = create_vector_t(size_of_type);
@@ -37,7 +37,7 @@ void free_vector_t(vector* vec)
 {
     if ((*vec) != NULL)
     {
-        if ((*vec)->data != NULL) free((*vec)->data);
+        free((*vec)->data);
         free((*vec));
         (*vec) = NULL;
     }
