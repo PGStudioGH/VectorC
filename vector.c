@@ -88,7 +88,7 @@ void pop_vector_t(vector vec)
 {
     if (vec != NULL && vec->data != NULL)
     {
-        vec->size--;
+        if (vec->size > 0) vec->size--;
     }
 }
 void* element_vector_t(vector vec, unsigned int index)
