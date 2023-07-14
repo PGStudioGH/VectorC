@@ -126,7 +126,7 @@ void erase_vector_t(vector vec, unsigned int index)
         if (index < vec->size)
         {
             unsigned char* current_data = (unsigned char*)vec->data + index * vec->size_of_type;
-            memcpy((void*)(current_data), (void*)(current_data + vec->size_of_type), (vec->size - index) * vec->size_of_type);
+            memcpy((void*)current_data, (void*)(current_data + vec->size_of_type), (vec->size - index) * vec->size_of_type);
             vec->size--;
         }
     }
