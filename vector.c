@@ -14,11 +14,8 @@ struct vector_t
 
 void init_vector_t(vector* vec, unsigned int size_of_type)
 {
-    if ((*vec) != NULL)
-    {
-        free((*vec)->data);
-        free((*vec));
-    }
+    free((*vec)->data);
+    free((*vec));
     (*vec) = create_vector_t(size_of_type);
 }
 vector create_vector_t(unsigned int size_of_type)
