@@ -113,8 +113,8 @@ void insert_vector_t(vector vec, void* data, unsigned int index)
                 if (temp != NULL) vec->data = temp;
             }
             unsigned char* current_data = (unsigned char*)vec->data + index * vec->size_of_type;
-            memmove((void*)(current_data + vec->size_of_type), (void*)(current_data), (vec->size - index) * vec->size_of_type);
-            memcpy((void*)(current_data), data, vec->size_of_type);
+            memmove((void*)(current_data + vec->size_of_type), (void*)current_data, (vec->size - index) * vec->size_of_type);
+            memcpy((void*)current_data, data, vec->size_of_type);
             vec->size++;
         }
     }
