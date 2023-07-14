@@ -9,9 +9,9 @@ extern "C" {
 typedef struct vector_t* vector;
 
 //Functions
-void init_vector_t(vector vec, unsigned int size_of_type);
+void init_vector_t(vector* vec, unsigned int size_of_type);
 vector create_vector_t(unsigned int size_of_type);
-void free_vector_t(vector vec);
+void free_vector_t(vector* vec);
 void restart_vector_t(vector vec);
 void reserve_vector_t(vector vec, unsigned int capacity);
 void push_vector_t(vector vec, void* data);
@@ -29,9 +29,9 @@ void print_vector_t(vector vec);
 #endif
 
 //Macros
-#define init_vector(vector, type)                   init_vector_t(vector, sizeof(type));
+#define init_vector(vector, type)                   init_vector_t(&vector, sizeof(type));
 #define create_vector(type)                         create_vector_t(sizeof(type))
-#define free_vector(vector)                         free_vector_t(vector)
+#define free_vector(vector)                         free_vector_t(&vector)
 #define restart_vector(vector)                      restart_vector_t(vector)
 #define reserve_vector(vector, capacity)            reserve_vector_t(vector, capacity)
 #define push_front_vector(vector, type, data)       { type temp = data; insert_vector_t(vector, &temp, 0); }
