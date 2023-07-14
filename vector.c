@@ -71,7 +71,7 @@ void reserve_vector_t(vector vec, unsigned int capacity)
 }
 void push_vector_t(vector vec, void* data)
 {
-    if (vec != NULL && vec->data != NULL)
+    if (vec != NULL && vec->data != NULL && data != NULL)
     {
         if (vec->size == vec->capacity)
         {
@@ -102,7 +102,7 @@ void* element_vector_t(vector vec, unsigned int index)
 }
 void insert_vector_t(vector vec, void* data, unsigned int index)
 {
-    if (vec != NULL && vec->data != NULL)
+    if (vec != NULL && vec->data != NULL && data != NULL)
     {
         if (index <= vec->size)
         {
