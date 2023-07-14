@@ -28,7 +28,7 @@ void print_vector_t(vector vec);
 }
 #endif
 
-//Macros
+//Macros for those who don't want to see * and &
 #define init_vector(vector, type)                   init_vector_t(&vector, sizeof(type));
 #define create_vector(type)                         create_vector_t(sizeof(type))
 #define free_vector(vector)                         free_vector_t(&vector)
