@@ -53,6 +53,7 @@ void reserve_vector_t(vector vec, unsigned int capacity)
         void* temp = realloc(vec->data, capacity * vec->size_of_type);
         if (temp != NULL) 
         {
+            if (vec->size > capacity) vec->size = capacity;
             vec->capacity = capacity;
             vec->data = temp;
         }
