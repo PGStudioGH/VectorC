@@ -5,10 +5,10 @@
 extern "C" {
 #endif
 
-//Typedef
+/* Typedef */
 typedef struct vector_t* vector;
 
-//Functions
+/* Functions */
 void init_vector_t(vector* vec, unsigned int size_of_type);
 vector create_vector_t(unsigned int size_of_type);
 void free_vector_t(vector* vec);
@@ -28,7 +28,7 @@ void print_vector_t(vector vec);
 }
 #endif
 
-//Macros for those who don't want to see * and &
+/* Macros for those who don't want to see * and & */
 #define init_vector(vector, type)                   init_vector_t(&vector, sizeof(type));
 #define create_vector(type)                         create_vector_t(sizeof(type))
 #define free_vector(vector)                         free_vector_t(&vector)
