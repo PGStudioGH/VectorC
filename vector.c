@@ -81,10 +81,11 @@ void push_vector_t(vector vec, void* data)
 
     if (vec->size == vec->capacity)
     {
-      void* temp = realloc(vec->data, (vec->capacity * 2) * vec->size_of_type);
+      unsigned int capacity = vec->capacity << 1;
+      void* temp = realloc(vec->data, capacity * vec->size_of_type);
       if (temp != NULL) 
       {
-        vec->capacity *= 2;
+        vec->capacity = capacity;
         vec->data = temp;
         unsigned char* current_data = (unsigned char*)vec->data + vec->size * vec->size_of_type;
         memcpy((void*)current_data, data, vec->size_of_type);
@@ -139,10 +140,11 @@ void insert_vector_t(vector vec, void* data, unsigned int index)
 
     if (vec->size == vec->capacity)
     {
-      void* temp = realloc(vec->data, (vec->capacity * 2) * vec->size_of_type);
+      unsigned int capacity = vec->capacity << 1;
+      void* temp = realloc(vec->data, capacity * vec->size_of_type);
       if (temp != NULL)
       {
-        vec->capacity *= 2;
+        vec->capacity = capacity;
         vec->data = temp;
         unsigned char* current_data = (unsigned char*)vec->data + index * vec->size_of_type;
         memmove((void*)(current_data + vec->size_of_type), (void*)current_data, (vec->size - index) * vec->size_of_type);
