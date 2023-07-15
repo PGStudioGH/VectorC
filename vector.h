@@ -17,6 +17,7 @@ void reserve_vector_t(vector vec, unsigned int capacity);
 void push_vector_t(vector vec, void* data);
 void pop_vector_t(vector vec);
 void* element_vector_t(vector vec, unsigned int index);
+void* get_data_vector_t(vector vec);
 void insert_vector_t(vector vec, void* data, unsigned int index);
 void erase_vector_t(vector vec, unsigned int index);
 void clear_vector_t(vector vec);
@@ -39,6 +40,7 @@ void print_vector_t(vector vec);
 #define pop_front_vector(vector)                    erase_vector_t(vector, 0)
 #define pop_back_vector(vector)                     pop_vector_t(vector)
 #define element_vector(vector, type, index)         *(type*)element_vector_t(vector, index)
+#define get_data_vector(vector, type)               *(type*)get_data_vector_t(vector)
 #define insert_vector(vector, type, data, index)    { type temp = data; insert_vector_t(vector, &temp, index); }
 #define erase_vector(vector, index)                 erase_vector_t(vector, index)
 #define clear_vector(vector)                        clear_vector_t(vector)
