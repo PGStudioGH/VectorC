@@ -5,10 +5,10 @@
 void hard_way()
 {
   printf("\nHard way without macros:\n");
-  //First way to create
+  /* First way to create */
   struct vector_t* v;
   v = create_vector_t(sizeof(int));
-  //Second way to create
+  /* Second way to create */
   init_vector_t(&v, sizeof(int));
 
   int temp = 864;
@@ -80,9 +80,9 @@ void hard_way()
 void easy_way()
 {
   printf("\nEasy way with macros:\n");
-  //First way to create
+  /* First way to create */
   vector v = create_vector(int);
-  //Second way to create
+  /* Second way to create */
   init_vector(v, int);
 
   push_back_vector(v, int, 864);
