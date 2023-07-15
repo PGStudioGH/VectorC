@@ -115,6 +115,14 @@ void* element_vector_t(vector vec, unsigned int index)
   }
   return NULL;
 }
+void* get_data(vector vec)
+{
+  if (vec != NULL)
+  {
+    return vec->data;
+  }
+  return NULL;
+}
 void insert_vector_t(vector vec, void* data, unsigned int index)
 {
   if (vec != NULL && data != NULL && index <= vec->size)
