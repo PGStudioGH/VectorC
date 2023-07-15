@@ -14,12 +14,12 @@ struct vector_t
 
 void init_vector_t(vector* vec, unsigned int size_of_type)
 {
-  if ((*vec) != NULL)
+  if (*vec != NULL)
   {
-  free((*vec)->data);
-  free((*vec));
+    free((*vec)->data);
+    free(*vec);
   }
-  (*vec) = create_vector_t(size_of_type);
+  *vec = create_vector_t(size_of_type);
 }
 vector create_vector_t(unsigned int size_of_type)
 {
@@ -35,11 +35,11 @@ vector create_vector_t(unsigned int size_of_type)
 }
 void free_vector_t(vector* vec)
 {
-  if ((*vec) != NULL)
+  if (*vec != NULL)
   {
-  free((*vec)->data);
-  free((*vec));
-  (*vec) = NULL;
+    free((*vec)->data);
+    free(*vec);
+    *vec = NULL;
   }
 }
 void restart_vector_t(vector vec)
@@ -101,73 +101,63 @@ void push_vector_t(vector vec, void* data)
 }
 void pop_vector_t(vector vec)
 {
-  if (vec != NULL && vec->data != NULL)
+  if (vec != NULL && vec->data != NULL && vec->size > 0)
   {
-    if (vec->size > 0) vec->size--;
+    vec->size--;
   }
 }
 void* element_vector_t(vector vec, unsigned int index)
 {
-  if (vec != NULL && vec->data != NULL)
+  if (vec != NULL && vec->data != NULL && index < vec->size)
   {
-    if (index < vec->size)
-    {
-      unsigned char* element = (unsigned char*)vec->data + index * vec->size_of_type;
-      return (void*)element;
-    }
-    return NULL;
+    unsigned char* element = (unsigned char*)vec->data + index * vec->size_of_type;
+    return (void*)element;
   }
   return NULL;
 }
 void insert_vector_t(vector vec, void* data, unsigned int index)
 {
-  if (vec != NULL && data != NULL)
+  if (vec != NULL && data != NULL && index <= vec->size)
   {
-    if (index <= vec->size)
+    if (vec->data == NULL)
     {
-      if (vec->data == NULL)
+      vec->data = malloc(vec->size_of_type);
+      if (vec->data != NULL)
       {
-        vec->data = malloc(vec->size_of_type);
-        if (vec->data != NULL)
-        {
-          vec->capacity = 1;
-        }
-        else return;
+        vec->capacity = 1;
       }
+      else return;
+    }
 
-      if (vec->size == vec->capacity)
+    if (vec->size == vec->capacity)
+    {
+      void* temp = realloc(vec->data, (vec->capacity * 2) * vec->size_of_type);
+      if (temp != NULL)
       {
-        void* temp = realloc(vec->data, (vec->capacity * 2) * vec->size_of_type);
-        if (temp != NULL)
-        {
-          vec->capacity *= 2;
-          vec->data = temp;
-          unsigned char* current_data = (unsigned char*)vec->data + index * vec->size_of_type;
-          memmove((void*)(current_data + vec->size_of_type), (void*)current_data, (vec->size - index) * vec->size_of_type);
-          memcpy((void*)current_data, data, vec->size_of_type);
-          vec->size++;
-        }
-      }
-      else
-      {
+        vec->capacity *= 2;
+        vec->data = temp;
         unsigned char* current_data = (unsigned char*)vec->data + index * vec->size_of_type;
         memmove((void*)(current_data + vec->size_of_type), (void*)current_data, (vec->size - index) * vec->size_of_type);
         memcpy((void*)current_data, data, vec->size_of_type);
         vec->size++;
       }
     }
+    else
+    {
+      unsigned char* current_data = (unsigned char*)vec->data + index * vec->size_of_type;
+      memmove((void*)(current_data + vec->size_of_type), (void*)current_data, (vec->size - index) * vec->size_of_type);
+      memcpy((void*)current_data, data, vec->size_of_type);
+      vec->size++;
+    }
   }
 }
 void erase_vector_t(vector vec, unsigned int index)
 {
-  if (vec != NULL)
+  if (vec != NULL && vec->data != NULL && index < vec->size)
   {
-    if (index < vec->size)
-    {
-      unsigned char* current_data = (unsigned char*)vec->data + index * vec->size_of_type;
-      memcpy((void*)current_data, (void*)(current_data + vec->size_of_type), (vec->size - index) * vec->size_of_type);
-      vec->size--;
-    }
+    unsigned char* current_data = (unsigned char*)vec->data + index * vec->size_of_type;
+    memcpy((void*)current_data, (void*)(current_data + vec->size_of_type), (vec->size - index) * vec->size_of_type);
+    vec->size--;
   }
 }
 void clear_vector_t(vector vec)
