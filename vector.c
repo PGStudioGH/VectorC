@@ -81,7 +81,7 @@ void push_vector_t(vector vec, void* data)
 
     if (vec->size == vec->capacity)
     {
-      unsigned int capacity = vec->capacity << 1;
+      unsigned int capacity = vec->capacity << 2;
       void* temp = realloc(vec->data, capacity * vec->size_of_type);
       if (temp != NULL) 
       {
@@ -140,7 +140,7 @@ void insert_vector_t(vector vec, void* data, unsigned int index)
 
     if (vec->size == vec->capacity)
     {
-      unsigned int capacity = vec->capacity << 1;
+      unsigned int capacity = vec->capacity << 2;
       void* temp = realloc(vec->data, capacity * vec->size_of_type);
       if (temp != NULL)
       {
