@@ -87,22 +87,17 @@ void push_vector_t(vector vec, const void* data)
       {
         vec->capacity = capacity;
         vec->data = temp;
-        unsigned char* current_data = (unsigned char*)vec->data + vec->size * vec->size_of_type;
-        memcpy((void*)current_data, data, vec->size_of_type);
-        vec->size++;
       }
+      else return;
     }
-    else
-    {
-      unsigned char* current_data = (unsigned char*)vec->data + vec->size * vec->size_of_type;
-      memcpy((void*)current_data, data, vec->size_of_type);
-      vec->size++;
-    }
+    unsigned char* current_data = (unsigned char*)vec->data + vec->size * vec->size_of_type;
+    memcpy((void*)current_data, data, vec->size_of_type);
+    vec->size++;
   }
 }
 void pop_vector_t(vector vec)
 {
-  if (vec != NULL && vec->data != NULL && vec->size > 0)
+  if (vec != NULL && vec->data != NULL && vec->size != 0)
   {
     vec->size--;
   }
@@ -146,19 +141,13 @@ void insert_vector_t(vector vec, const void* data, const unsigned int index)
       {
         vec->capacity = capacity;
         vec->data = temp;
-        unsigned char* current_data = (unsigned char*)vec->data + index * vec->size_of_type;
-        memmove((void*)(current_data + vec->size_of_type), (void*)current_data, (vec->size - index) * vec->size_of_type);
-        memcpy((void*)current_data, data, vec->size_of_type);
-        vec->size++;
       }
+      else return;
     }
-    else
-    {
-      unsigned char* current_data = (unsigned char*)vec->data + index * vec->size_of_type;
-      memmove((void*)(current_data + vec->size_of_type), (void*)current_data, (vec->size - index) * vec->size_of_type);
-      memcpy((void*)current_data, data, vec->size_of_type);
-      vec->size++;
-    }
+    unsigned char* current_data = (unsigned char*)vec->data + index * vec->size_of_type;
+    memmove((void*)(current_data + vec->size_of_type), (void*)current_data, (vec->size - index) * vec->size_of_type);
+    memcpy((void*)current_data, data, vec->size_of_type);
+    vec->size++;
   }
 }
 void erase_vector_t(vector vec, const unsigned int index)
