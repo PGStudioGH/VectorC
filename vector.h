@@ -9,17 +9,17 @@ extern "C" {
 typedef struct vector_t* vector;
 
 /* Functions */
-void init_vector_t(vector* vec, unsigned int size_of_type);
-vector create_vector_t(unsigned int size_of_type);
+void init_vector_t(vector* vec, const unsigned int size_of_type);
+vector create_vector_t(const unsigned int size_of_type);
 void free_vector_t(vector* vec);
 void restart_vector_t(vector vec);
-void reserve_vector_t(vector vec, unsigned int capacity);
-void push_vector_t(vector vec, void* data);
+void reserve_vector_t(vector vec, const unsigned int capacity);
+void push_vector_t(vector vec, const void* data);
 void pop_vector_t(vector vec);
-void* element_vector_t(vector vec, unsigned int index);
+void* element_vector_t(vector vec, const unsigned int index);
 void* get_data_vector_t(vector vec);
-void insert_vector_t(vector vec, void* data, unsigned int index);
-void erase_vector_t(vector vec, unsigned int index);
+void insert_vector_t(vector vec, const void* data, const unsigned int index);
+void erase_vector_t(vector vec, const unsigned int index);
 void clear_vector_t(vector vec);
 unsigned int size_vector_t(vector vec);
 unsigned int capacity_vector_t(vector vec);
