@@ -12,7 +12,7 @@ struct vector_t
   void* data;
 };
 
-void init_vector_t(vector* vec, unsigned int size_of_type)
+void init_vector_t(vector* vec, const unsigned int size_of_type)
 {
   if (*vec != NULL)
   {
@@ -21,7 +21,7 @@ void init_vector_t(vector* vec, unsigned int size_of_type)
   }
   *vec = create_vector_t(size_of_type);
 }
-vector create_vector_t(unsigned int size_of_type)
+vector create_vector_t(const unsigned int size_of_type)
 {
   vector new_vector = (vector)malloc(sizeof(struct vector_t));
   if (new_vector != NULL)
@@ -52,7 +52,7 @@ void restart_vector_t(vector vec)
     vec->data = NULL;
   }
 }
-void reserve_vector_t(vector vec, unsigned int capacity)
+void reserve_vector_t(vector vec, const unsigned int capacity)
 {
   if (vec != NULL)
   {
@@ -65,7 +65,7 @@ void reserve_vector_t(vector vec, unsigned int capacity)
     }
   }
 }
-void push_vector_t(vector vec, void* data)
+void push_vector_t(vector vec, const void* data)
 {
   if (vec != NULL && data != NULL)
   {
@@ -107,7 +107,7 @@ void pop_vector_t(vector vec)
     vec->size--;
   }
 }
-void* element_vector_t(vector vec, unsigned int index)
+void* element_vector_t(vector vec, const unsigned int index)
 {
   if (vec != NULL && vec->data != NULL && index < vec->size)
   {
@@ -124,7 +124,7 @@ void* get_data(vector vec)
   }
   return NULL;
 }
-void insert_vector_t(vector vec, void* data, unsigned int index)
+void insert_vector_t(vector vec, const void* data, const unsigned int index)
 {
   if (vec != NULL && data != NULL && index <= vec->size)
   {
@@ -161,7 +161,7 @@ void insert_vector_t(vector vec, void* data, unsigned int index)
     }
   }
 }
-void erase_vector_t(vector vec, unsigned int index)
+void erase_vector_t(vector vec, const unsigned int index)
 {
   if (vec != NULL && vec->data != NULL && index < vec->size)
   {
