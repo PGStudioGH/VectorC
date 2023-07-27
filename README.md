@@ -16,7 +16,7 @@ How use vector?
 * Use macro `template_vector(type);` before using vector
 * Create vector using macro `vector(type, name_vector);`
 * You can use methods: `name_vector.methods->name_method(...);`
-* You can use operator [], just use macro `DATA(name_vector, type)[index]` or create temporary variable `type* name_variable = DATA(name_vector, type); name_variable[index] = ...;`
+* You can use operator [], just use macro `DATA(name_vector, type)[index] = ...;` or create temporary variable `type* name_variable = DATA(name_vector, type); name_variable[index] = ...;`
 * With enjoy :)
 * But dont forget to free vector using macro `free_vector(name_vector);`
  
