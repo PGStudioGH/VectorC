@@ -1,7 +1,7 @@
 #ifndef VECTORC89_H
 #define VECTORC89_H
 
-/** How install VectorC.h **
+/** How install VectorC.h? **
  * 1. Just download VectorC.h and put on own project C
  * 2. Include VectorC.h using code: "#include "VectorC.h""
  * 3. Done
