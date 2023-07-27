@@ -22,16 +22,16 @@ However, I recommend you use VectorC.h for own project in C. Because there is a 
  * 6. But dont forget to free vector using macro "free_vector(name_vector);"
  
    Methods:
- * restart(self);
- * clear(self);
- * reserve(self, capacity);
- * push(self, value);
- * pop(self);
- * insert(self, index, value);
- * erase(self, index);
- * size(self);
- * capacity(self);
- * print_data(self);
+restart(self);
+clear(self);
+reserve(self, capacity);
+push(self, value);
+pop(self);
+insert(self, index, value);
+erase(self, index);
+size(self);
+capacity(self);
+print_data(self);
  
    How use self?
  * - Just write "name_vector.self"
