@@ -1,6 +1,36 @@
 #ifndef VECTORC89_H
 #define VECTORC89_H
 
+/** How use vector? **
+ * 1. Use macro "template_vector(type);" before using vector
+ * 2. Create vector using macro "vector(type, name_vector);"
+ * 3. You can use methods: "name_vector.methods->name_method(...);"
+ * 4. You can use operator [], just use macro "DATA(name_vector, type)[index]" or create temporary variable "type* name_variable = DATA(name_vector, type); name_variable[index] = ...;"
+ * 5. With enjoy :)
+ * 6. But dont forget to free vector using macro "free_vector(name_vector);"
+ *
+ * Methods:
+ * restart(self);
+ * clear(self);
+ * reserve(self, capacity);
+ * push(self, value);
+ * pop(self);
+ * insert(self, index, value);
+ * erase(self, index);
+ * size(self);
+ * capacity(self);
+ * print_data(self);
+ *
+ * How use self?
+ * - Just write "name_vector.self"
+ *
+ * How use type struct?
+ * - You need use typedef struct
+ *
+ * P.S. Please look file example.c
+ **/
+
+
 /* Includes */
 #include <stdio.h>
 #include <stdlib.h>
