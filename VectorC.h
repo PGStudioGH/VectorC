@@ -11,7 +11,13 @@
 
 /** How use vector? **
  * 1. Use macro "template_vector(type);" before using vector
- * 2. Create vector using macro "vector(type, name_vector);"
+ * 2. Create vector using macro "vector(type, name_vector);". Even you can create vector without virtual methods using macro "vector_directly(type, name_vector);". See difference:
+ // Vector with virtual methods //
+ vector(int, v1);
+ v1.methods->push(v1.self, 500);
+ // Vector without virtual methods //
+ vector_directly(int, v2);
+ v2.push(v2.self, 500);
  * 3. You can use methods: "name_vector.methods->name_method(...);"
  * 4. You can use operator [], just use macro "DATA(name_vector, type)[index]" or create temporary variable "type* name_variable = DATA(name_vector, type); name_variable[index] = ...;"
  * 5. With enjoy :)
@@ -71,6 +77,20 @@ struct _vector
 {
   struct _vector_data* self;
   const struct _vector_vtable* methods;
+};
+struct _vector_directly
+{
+    struct _vector_data* self;
+    void (*restart)();
+    void (*clear)();
+    void (*reserve)();
+    void (*push)();
+    void (*pop)();
+    void (*insert)();
+    void (*erase)();
+    unsigned int (*size)();
+    unsigned int (*capacity)();
+    void (*print_data)();
 };
 
 /* Functions without template */
@@ -140,9 +160,14 @@ unsigned int _capacity_vector(struct _vector_data* vec)
   _init_vector_data(&V.self);\
   V.methods = &_vector_vtable_##T;
 
+#define vector_directly(T, V)\
+    struct _vector_directly V;\
+    _init_vector_data(&V.self);\
+    *(struct _vector_vtable*)((void*)&V.self + sizeof(V.self)) = _vector_vtable_##T;
+
 #define free_vector(V)\
   _free_vector_data(&V.self);\
-  { struct _vector blank = {0}; V = blank; };
+  memset(&V, 0, sizeof(V));
 
 #define DATA(V, T) ((T*)V.self->data)
 
