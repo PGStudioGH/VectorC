@@ -24,10 +24,10 @@ Methods:
 * restart(self), clear(self), reserve(self, capacity), push(self, value), pop(self), insert(self, index, value), erase(self, index), size(self), capacity(self), print_data(self)
  
 How use self?
-* - Just write "name_vector.self"
+* Just write "name_vector.self"
  
 How use type struct?
-* - You need use typedef struct
+* You need use typedef struct
  
 P.S. Please look file example.c
 ***
