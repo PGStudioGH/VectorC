@@ -30,7 +30,6 @@
  * P.S. Please look file example.c
  **/
 
-
 /* Includes */
 #include <stdio.h>
 #include <stdlib.h>
