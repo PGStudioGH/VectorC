@@ -14,7 +14,15 @@ Attention! This header can be work only in compiler for C (C89 and latest), not 
 
 How use vector?
 * Use macro `template_vector(type);` before using vector
-* Create vector using macro `vector(type, name_vector);`
+* Create vector using macro `vector(type, name_vector);`. Even you can create vector without virtual methods using macro `vector_directly(type, name_vector);`. See difference:
+```
+ // Vector with virtual methods //
+ vector(int, v1);
+ v1.methods->push(v1.self, 500);
+ // Vector without virtual methods //
+ vector_directly(int, v2);
+ v2.push(v2.self, 500);
+```
 * You can use methods: `name_vector.methods->name_method(...);`
 * You can use operator [], just use macro `DATA(name_vector, type)[index] = ...;` or create temporary variable:
 ```
