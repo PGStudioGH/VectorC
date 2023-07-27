@@ -1,6 +1,14 @@
 #ifndef VECTORC89_H
 #define VECTORC89_H
 
+/** How install VectorC.h **
+ * 1. Just download VectorC.h and put on own project C
+ * 2. Include VectorC.h using code: "#include "VectorC.h""
+ * 3. Done
+ *
+ * Attention! This header can be work only in compiler for C (C89 and latest), not C++.
+ **/
+
 /** How use vector? **
  * 1. Use macro "template_vector(type);" before using vector
  * 2. Create vector using macro "vector(type, name_vector);"
