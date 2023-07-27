@@ -1,9 +1,5 @@
-#ifndef VECTOR_WITH_TEMPLATE_H
-#define VECTOR_WITH_TEMPLATE_H
-
-#ifdef __cplusplus
-extern "C" {
-#endif
+#ifndef VECTORC89_H
+#define VECTORC89_H
 
 /* Includes */
 #include <stdio.h>
@@ -223,9 +219,5 @@ unsigned int _capacity_vector(struct _vector_data* vec)
     (unsigned int (*)())_size_vector, (unsigned int (*)())_capacity_vector,\
     (void (*)())_print_data_vector_##T\
   };
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif
