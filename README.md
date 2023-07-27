@@ -39,10 +39,10 @@ print_data(self); //Print data
 ```
  
 How use self?
-* Just write "name_vector.self"
+* Just write `name_vector.self`
  
 How use type struct?
-* You need use typedef struct
+* You need use `typedef struct name_struct;`
  
 P.S. Please look file example.c
 ***
