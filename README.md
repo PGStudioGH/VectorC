@@ -8,20 +8,31 @@ However, I recommend you use VectorC.h for own project in C. Because there is a 
 ***
 How install VectorC.h?
 * Just download VectorC.h and put on own project C
-* Include VectorC.h using code: "#include "VectorC.h""
+* Include VectorC.h using code: `#include "VectorC.h"`
 * Done
 Attention! This header can be work only in compiler for C (C89 and latest), not C++.
 
 How use vector?
-* Use macro "template_vector(type);" before using vector
-* Create vector using macro "vector(type, name_vector);"
-* You can use methods: "name_vector.methods->name_method(...);"
-* You can use operator [], just use macro "DATA(name_vector, type)[index]" or create temporary variable "type* name_variable = DATA(name_vector, type); name_variable[index] = ...;"
+* Use macro `template_vector(type);` before using vector
+* Create vector using macro `vector(type, name_vector);`
+* You can use methods: `name_vector.methods->name_method(...);`
+* You can use operator [], just use macro `DATA(name_vector, type)[index]` or create temporary variable `type* name_variable = DATA(name_vector, type); name_variable[index] = ...;`
 * With enjoy :)
-* But dont forget to free vector using macro "free_vector(name_vector);"
+* But dont forget to free vector using macro `free_vector(name_vector);`
  
 Methods:
-* restart(self), clear(self), reserve(self, capacity), push(self, value), pop(self), insert(self, index, value), erase(self, index), size(self), capacity(self), print_data(self)
+```
+restart(self); //Reset vector, free array
+clear(self); //Clear vector without free
+reserve(self, capacity); //Resize capacity of array
+push(self, value); //Push
+pop(self); //Pop
+insert(self, index, value); //Add element in array
+erase(self, index); //Delete element from array
+size(self); //Get length of vector
+capacity(self); //Get capacity of vector
+print_data(self); //Print data
+```
  
 How use self?
 * Just write "name_vector.self"
