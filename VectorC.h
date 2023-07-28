@@ -23,8 +23,10 @@
  * clear(self);
  * reserve(self, capacity);
  * push(self, value);
+ * push(self, type, value); --> for vector without template
  * pop(self);
  * insert(self, index, value);
+ * insert(self, type, index, value); --> for vector without template
  * erase(self, index);
  * size(self);
  * capacity(self);
