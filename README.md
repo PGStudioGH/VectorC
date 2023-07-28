@@ -39,11 +39,14 @@ capacity(self); //Get capacity of vector
 print_data(self); //Print data
 ```
  
-How use self?
+How I can use self?
 * Just write `name_vector.self`
  
-How use type struct?
-* You need use `typedef struct _name_struct { ... } name_struct;`
+How I can use type struct?
+* Need use `typedef struct _name_struct { ... } name_struct;`
+
+How I can use type pointer? Pointer to function?
+* Just write `typedef type* type_ptr;`, then `vector(type_ptr, v);`. Even write `typedef type (*type_fun)();`, then `vector(type_fun, v);`
  
 P.S. Please look file example.c
 ***
