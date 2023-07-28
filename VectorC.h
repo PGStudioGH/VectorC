@@ -39,7 +39,7 @@
  * - Need use typedef struct
  *
  * How I can use pointer type? Pointer to function?
- * - Just write "typedef type* type_ptr;", then "vector(type_ptr, v);". Even wrtie "typedef type (*type_fun)();", then "vector(type_fun, v);"
+ * - Just write "typedef type* type_ptr;", then "vector(type_ptr, v);". Even write "typedef type (*type_fun)();", then "vector(type_fun, v);"
  *
  * P.S. Please look file example.c
  **/
