@@ -32,11 +32,14 @@
  * capacity(self);
  * print_data(self);
  *
- * How use self?
+ * How I can use self?
  * - Just write "name_vector.self"
  *
- * How use type struct?
- * - You need use typedef struct
+ * How I can use type struct?
+ * - Need use typedef struct
+ *
+ * How I can use pointer type? Pointer to function?
+ * - Just write "typedef type* type_ptr;", then "vector(type_ptr, v);". Even wrtie "typedef type (*type_fun)();", then "vector(type_fun, v);".
  *
  * P.S. Please look file example.c
  **/
@@ -347,7 +350,7 @@ void _print_data_vector(void* self)
       _pop_back_vector, _insert_vector_##T,\
       _erase_vector, _size_vector,\
       _capacity_vector, _print_data_vector\
-    };
+    };\
     ((struct _vector_data*)V.self)->size_of_type = sizeof(T);
 #endif
 
