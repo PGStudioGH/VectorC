@@ -29,8 +29,10 @@ restart(self); //Reset vector, free array
 clear(self); //Clear vector without free
 reserve(self, capacity); //Resize capacity of array
 push(self, value); //Push
+push(self, type, value); //Push for vector without template
 pop(self); //Pop
 insert(self, index, value); //Add element in array
+insert(self, type, index, value); //Insert for vector without template
 erase(self, index); //Delete element from array
 size(self); //Get length of vector
 capacity(self); //Get capacity of vector
