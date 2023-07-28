@@ -1,5 +1,5 @@
 # VectorC
-Welcome to safe vector in C for any type, but because of safety little slow ~0-10% than std::vector from C++. Support C89 and latest, even C++98 and latest.
+Welcome to safe vector in C for any type, but because of safety little slower ~0-10% (sometime little faster ~0-10%) than std::vector from C++. Support C89 and latest, even C++98 and latest.
 Anyone knows how to optimize, please write in a comment.
 You can compare with vector in C++. It might be interesting to see the difference.
 ***
