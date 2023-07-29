@@ -19,11 +19,11 @@ int main(void)
   v.print_data(v.self);
 
   printf("\nChanged fourth element to 2022:\n");
-  DATA(v, short)[3] = 2022;
+  at(v, short)[3] = 2022;
   v.print_data(v.self);
 
   printf("\nSubtract first element by third and second elements:\n");
-  short* data = DATA(v, short);
+  short* data = at(v, short);
   data[0] -= data[2] + data[1];
   v.print_data(v.self);
 
