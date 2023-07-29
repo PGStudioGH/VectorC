@@ -14,7 +14,7 @@
  * 2. If you want use vector without method (universal vector), you can write "#define VECTOR_WITHOUT_TEMPLATE" before including header. Please look file example_without_template.c. But slower than vector with template. 
  * 3. Create vector using macro "vector(type, name_vector);"
  * 4. You can use methods: "name_vector.name_method(...);"
- * 5. You can use operator [], just use macro "DATA(name_vector, type)[index]" or create temporary variable "type* name_variable = DATA(name_vector, type); name_variable[index] = ...;"
+ * 5. You can use operator [], just use macro "at(name_vector, type)[index]" or create temporary variable "type* name_variable = at(name_vector, type); name_variable[index] = ...;"
  * 6. With enjoy :)
  * 7. But dont forget to free vector using macro "free_vector(name_vector);", because C don't have auto-deconstructor
  *
@@ -358,7 +358,7 @@ void _print_data_vector(void* self)
   free(((struct _vector_data*)V.self)->data);\
   free(V.self);
 
-#define DATA(V, T)\
+#define at(V, T)\
   ((T*)((struct _vector_data*)V.self)->data)
 
 #ifdef __cplusplus
