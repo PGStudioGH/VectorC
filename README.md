@@ -15,9 +15,9 @@ How use vector?
 * If you want use vector without template (universal vector), you can write `#define VECTOR_WITHOUT_TEMPLATE` before including header. Please look file example_without_template.c. But slower than vector with template.
 * Create vector using macro `vector(type, name_vector);`
 * You can use methods: `name_vector.name_method(...);`
-* You can use operator [], just use macro `DATA(name_vector, type)[index] = ...;` or create temporary variable:
+* You can use operator [], just use macro `at(name_vector, type)[index] = ...;` or create temporary variable:
 ```
-type* name_variable = DATA(name_vector, type);
+type* name_variable = at(name_vector, type);
 name_variable[index] = ...;
 ```
 * With enjoy :)
