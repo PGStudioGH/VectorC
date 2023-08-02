@@ -11,7 +11,7 @@
 
 /** How use vector? **
  * 1. Use macro "template_vector(type);" before using vector
- * 2. If you want use vector without method (universal vector), you can write "#define VECTOR_WITHOUT_TEMPLATE" before including header. Please look file example_without_template.c. But slower than vector with template. 
+ * 2. If you want use vector with style C and without method (universal vector), you can write "#define VECTOR_WITH_STYLE_C" before including header. Please look file example_with_style_c.c. But slower than vector with template. 
  * 3. Create vector using macro "vector(type, name_vector);"
  * 4. You can use methods: "name_vector.name_method(...);"
  * 5. You can use operator [], just use macro "at(name_vector, type)[index]" or create temporary variable "type* name_variable = at(name_vector, type); name_variable[index] = ...;"
@@ -64,7 +64,7 @@ unsigned int _capacity_vector(void* self);
 void _reserve_vector(void* self, unsigned int capacity);
 void _print_data_vector(void* self);
 
-#ifdef VECTOR_WITHOUT_TEMPLATE
+#ifdef VECTOR_WITH_STYLE_C
   void _push_back_vector(void* self, void* data);
   void _insert_vector(void* self, unsigned int index, void* data);
   struct _vector;
@@ -167,7 +167,7 @@ void _print_data_vector(void* self)
   else printf("Empty vector\n");
 }
 
-#ifdef VECTOR_WITHOUT_TEMPLATE
+#ifdef VECTOR_WITH_STYLE_C
   void _push_back_vector(void* self, void* data)
   {
     struct _vector_data* vec = (struct _vector_data*)self;
@@ -229,16 +229,6 @@ void _print_data_vector(void* self)
   struct _vector
   {
     void* const self;
-    void (*const _restart)(void*);
-    void (*const _clear)(void*);
-    void (*const _reserve)(void*, unsigned int);
-    void (*const _push)(void*, void*);
-    void (*const _pop)(void*);
-    void (*const _insert)(void*, unsigned int, void*);
-    void (*const _erase)(void*, unsigned int);
-    unsigned int (*const _size)(void*);
-    unsigned int (*const _capacity)(void*);
-    void (*const _print_data)(void*);
   };
 #else
   /* Functions with template */
@@ -318,28 +308,23 @@ void _print_data_vector(void* self)
 #endif
 
 /* Macros */
-#ifdef VECTOR_WITHOUT_TEMPLATE
+#ifdef VECTOR_WITH_STYLE_C
   #define vector(T, V)\
     const struct _vector V =\
     {\
-      calloc(1, sizeof(struct _vector_data)),\
-      _restart_vector, _clear_vector,\
-      _reserve_vector, _push_back_vector,\
-      _pop_back_vector, _insert_vector,\
-      _erase_vector, _size_vector,\
-      _capacity_vector, _print_data_vector\
+      calloc(1, sizeof(struct _vector_data))\
     };\
     ((struct _vector_data*)V.self)->size_of_type = sizeof(T);
-  #define restart(self)                      _restart(self)
-  #define reserve(self, capacity)            _reserve(self, capacity)
-  #define push(self, type, data)             _push(self, &((type){data}))
-  #define pop(self)                          _pop(self)
-  #define insert(self, type, index, data)    _insert(self, index, &((type){data}))
-  #define erase(self, index)                 _erase(self, index)
-  #define clear(self)                        _clear(self)
-  #define size(self)                         _size(self)
-  #define capacity(self)                     _capacity(self)
-  #define print_data(self)                   _print_data(self)
+  #define restart(vec)                      _restart_vector(vec.self)
+  #define reserve(vec, capacity)            _reserve_vector(vec.self, capacity)
+  #define push(vec, type, data)             _push_back_vector(vec.self, &((type){data}))
+  #define pop(vec)                          _pop_back_vector(vec.self)
+  #define insert(vec, type, index, data)    _insert_vector(vec.self, index, &((type){data}))
+  #define erase(vec, index)                 _erase_vector(vec.self, index)
+  #define clear(vec)                        _clear_vector(vec.self)
+  #define size(vec)                         _size_vector(vec.self)
+  #define capacity(vec)                     _capacity_vector(vec.self)
+  #define print_data(vec)                   _print_data_vector(vec.self)
 #else
   #define vector(T, V)\
     const struct _vector_##T V =\
