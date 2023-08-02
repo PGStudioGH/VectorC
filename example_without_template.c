@@ -1,5 +1,5 @@
 /* Disable template */
-#define VECTOR_WITHOUT_TEMPLATE
+#define VECTOR_WITH_STYLE_C
 
 /* Header VectorC include stdio.h, stdlib.h, string.h */
 #include "VectorC.h"
@@ -8,57 +8,57 @@ int main(void)
 {
   vector(short, v);
 
-  v.push(v.self, short, 864);
-  v.push(v.self, short, 25);
-  v.push(v.self, short, 93);
-  v.push(v.self, short, 82);
-  v.push(v.self, short, 6);
-  v.push(v.self, short, 9);
-  v.push(v.self, short, 0xF8F0);
+  push(v, short, 864);
+  push(v, short, 25);
+  push(v, short, 93);
+  push(v, short, 82);
+  push(v, short, 6);
+  push(v, short, 9);
+  push(v, short, 0xF8F0);
   printf("Show all elements from vector:\n");
-  v.print_data(v.self);
+  print_data(v);
 
   printf("\nChanged fourth element to 2022:\n");
   at(v, short)[3] = 2022;
-  v.print_data(v.self);
+  print_data(v);
 
   printf("\nSubtract first element by third and second elements:\n");
   short* data = at(v, short);
   data[0] -= data[2] + data[1];
-  v.print_data(v.self);
+  print_data(v);
 
   printf("\nAdd new element 9999 on fourth element:\n");
-  v.insert(v.self, short, 3, 9999);
-  v.print_data(v.self);
+  insert(v, short, 3, 9999);
+  print_data(v);
 
   printf("\nAdd new element 666 on first element:\n");
-  v.insert(v.self, short, 0, 666);
-  v.print_data(v.self);
+  insert(v, short, 0, 666);
+  print_data(v);
 
   printf("\nDelete second element:\n");
-  v.erase(v.self, 1);
-  v.print_data(v.self);
+  erase(v, 1);
+  print_data(v);
 
   printf("\nDelete first element:\n");
-  v.erase(v.self, 0);
-  v.print_data(v.self);
+  erase(v, 0);
+  print_data(v);
 
   printf("\nUse pop:\n");
-  v.pop(v.self);
-  v.print_data(v.self);
+  pop(v);
+  print_data(v);
 
   printf("\nClear vector:\n");
-  v.clear(v.self);
-  v.print_data(v.self);
+  clear(v);
+  print_data(v);
 
   printf("\nAdd 10 element, then add first element:\n");
   int i;
   for (i = 0; i < 10; i++)
-    v.push(v.self, short, i);
-  v.insert(v.self, short, 0, 0x1357);
-  v.print_data(v.self);
+    push(v, short, i);
+  insert(v, short, 0, 0x1357);
+  print_data(v);
 
-  printf("\nSize: %u\nCapacity: %u", v.size(v.self), v.capacity(v.self));
+  printf("\nSize: %u\nCapacity: %u", size(v), capacity(v));
 
   free_vector(v);
 
