@@ -12,7 +12,7 @@ How install VectorC.h?
 
 How use vector?
 * Use macro `template_vector(type);` before using vector in global visibility
-* If you want use vector without template (universal vector), you can write `#define VECTOR_WITHOUT_TEMPLATE` before including header. Please look file example_without_template.c. But slower than vector with template.
+* If you want use vector with style C and without method (universal vector), you can write `#define VECTOR_WITH_STYLE_C` before including header. Please look file example_with_style_c.c. But slower than vector with template. 
 * Create vector using macro `vector(type, name_vector);`
 * You can use methods: `name_vector.name_method(...);`
 * You can use operator [], just use macro `at(name_vector, type)[index] = ...;` or create temporary variable:
