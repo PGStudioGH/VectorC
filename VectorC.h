@@ -146,8 +146,10 @@ void _print_data_vector(void* self)
     while (i < size) {
       printf("%02hhX ", *((unsigned char*)vec->data + i));
       if (i != size - 1) {
-        if ((i & ((vec->size_of_type << 2) - 1)) == ((vec->size_of_type << 2) - 1)) printf("\n");
-        else if ((i & (vec->size_of_type - 1)) == (vec->size_of_type - 1)) printf("| ");
+        if ((i & ((vec->size_of_type << 2) - 1)) == ((vec->size_of_type << 2) - 1))
+          printf("\n");
+        else if ((i & (vec->size_of_type - 1)) == (vec->size_of_type - 1))
+          printf("| ");
       }
       i++;
     }
