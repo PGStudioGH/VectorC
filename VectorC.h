@@ -102,15 +102,12 @@ void _pop_back_vector(void* self)
 {
   struct _vector_data* vec = (struct _vector_data*)self;
   if (vec->size > 0)
-  {
     vec->size--;
-  }
 }
 void _erase_vector(void* self, unsigned int index)
 {
   struct _vector_data* vec = (struct _vector_data*)self;
-  if (vec->data != NULL && index < vec->size)
-  {
+  if (vec->data != NULL && index < vec->size) {
     unsigned char* current_data = (unsigned char*)vec->data + index * vec->size_of_type;
     memcpy((void*)current_data, (void*)(current_data + vec->size_of_type), (vec->size - index) * vec->size_of_type);
     vec->size--;
@@ -120,26 +117,21 @@ unsigned int _size_vector(void* self)
 {
   struct _vector_data* vec = (struct _vector_data*)self;
   if (vec->data != NULL)
-  {
     return vec->size;
-  }
   return 0;
 }
 unsigned int _capacity_vector(void* self)
 {
   struct _vector_data* vec = (struct _vector_data*)self;
   if (vec->data != NULL)
-  {
     return vec->capacity;
-  }
   return 0;
 }
 void _reserve_vector(void* self, unsigned int capacity)
 {
   struct _vector_data* vec = (struct _vector_data*)self;
   void* temp = realloc(vec->data, capacity * vec->size_of_type);
-  if (temp != NULL)
-  {
+  if (temp != NULL) {
     vec->capacity = capacity;
     vec->data = temp;
   }
@@ -147,16 +139,13 @@ void _reserve_vector(void* self, unsigned int capacity)
 void _print_data_vector(void* self)
 {
   struct _vector_data* vec = (struct _vector_data*)self;
-  if (vec->data != NULL && vec->size != 0)
-  {
+  if (vec->data != NULL && vec->size != 0) {
     printf("Data:\n");
     unsigned int i = 0;\
     unsigned int size = vec->size * vec->size_of_type;
-    while (i < size)
-    {
+    while (i < size) {
       printf("%02hhX ", *((unsigned char*)vec->data + i));
-      if (i != size - 1)
-      {
+      if (i != size - 1) {
         if ((i & ((vec->size_of_type << 2) - 1)) == ((vec->size_of_type << 2) - 1)) printf("\n");
         else if ((i & (vec->size_of_type - 1)) == (vec->size_of_type - 1)) printf("| ");
       }
@@ -171,26 +160,21 @@ void _print_data_vector(void* self)
   void _push_back_vector(void* self, void* data)
   {
     struct _vector_data* vec = (struct _vector_data*)self;
-    if (vec->data == NULL)
-    {
+    if (vec->data == NULL) {
       vec->data = malloc(vec->size_of_type);
       if (vec->data != NULL)
-      {
         vec->capacity = 1;
-      }
       else return;
     }
     
-    if (vec->size == vec->capacity)
-    {
+    if (vec->size == vec->capacity) {
       void* temp = realloc(vec->data, (vec->capacity << 1) * vec->size_of_type);
-      if (temp != NULL)
-      {
+      if (temp != NULL) {
         vec->capacity <<= 1;
         vec->data = temp;
       }
       else return;
-    }\
+    }
     unsigned char* current_data = (unsigned char*)vec->data + vec->size * vec->size_of_type;
     memcpy((void*)current_data, data, vec->size_of_type);
     vec->size++;
@@ -198,23 +182,17 @@ void _print_data_vector(void* self)
   void _insert_vector(void* self, unsigned int index, void* data)
   {
     struct _vector_data* vec = (struct _vector_data*)self;
-    if (index <= vec->size)
-    {
-      if (vec->data == NULL)
-      {
+    if (index <= vec->size) {
+      if (vec->data == NULL) {
         vec->data = malloc(vec->size_of_type);
         if (vec->data != NULL)
-        {
           vec->capacity = 1;
-        }
         else return;
       }
       
-      if (vec->size == vec->capacity)
-      {
+      if (vec->size == vec->capacity) {
         void* temp = realloc(vec->data, (vec->capacity << 1) * vec->size_of_type);
-        if (temp != NULL)
-        {
+        if (temp != NULL) {
           vec->capacity <<= 1;
           vec->data = temp;
         }
@@ -237,21 +215,16 @@ void _print_data_vector(void* self)
     void _push_back_vector_##T(void* self, T data)\
     {\
       struct _vector_data* vec = (struct _vector_data*)self;\
-      if (vec->data == NULL)\
-      {\
+      if (vec->data == NULL) {\
         vec->data = malloc(sizeof(T));\
         if (vec->data != NULL)\
-        {\
           vec->capacity = 1;\
-        }\
         else return;\
       }\
       \
-      if (vec->size == vec->capacity)\
-      {\
+      if (vec->size == vec->capacity) {\
         void* temp = realloc(vec->data, (vec->capacity << 1) * sizeof(T));\
-        if (temp != NULL)\
-        {\
+        if (temp != NULL) {\
           vec->capacity <<= 1;\
           vec->data = temp;\
         }\
@@ -263,23 +236,17 @@ void _print_data_vector(void* self)
     void _insert_vector_##T(void* self, unsigned int index, T data)\
     {\
       struct _vector_data* vec = (struct _vector_data*)self;\
-      if (index <= vec->size)\
-      {\
-        if (vec->data == NULL)\
-        {\
+      if (index <= vec->size) {\
+        if (vec->data == NULL) {\
           vec->data = malloc(sizeof(T));\
           if (vec->data != NULL)\
-          {\
             vec->capacity = 1;\
-          }\
           else return;\
         }\
         \
-        if (vec->size == vec->capacity)\
-        {\
+        if (vec->size == vec->capacity) {\
           void* temp = realloc(vec->data, (vec->capacity << 1) * sizeof(T));\
-          if (temp != NULL)\
-          {\
+          if (temp != NULL) {\
             vec->capacity <<= 1;\
             vec->data = temp;\
           }\
